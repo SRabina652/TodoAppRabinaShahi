@@ -16,10 +16,10 @@
     <string name="pick_date">Pick Date</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="category_name">Category Name</string>
-    <string name="todo_title">Title</string>
-    <string name="todo_description">Description</string>
-    <string name="todo_date">Date</string>
-    <string name="todo_priority">Priority</string>
+    <string name="todo_title">Enter Title</string>
+    <string name="todo_description">Enter Description</string>
+    <string name="todo_date">Pick Date</string>
+    <string name="todo_priority">Choose Priority</string>
     <string name="todo_high">High</string>
     <string name="todo_medium">Medium</string>
     <string name="todo_low">Low</string>
@@ -31,8 +31,18 @@
     <string name="password">Password</string>
     <string name="username">Username</string>
     <string name="confirm_password">Confirm New Password</string>
-    <string name="new_password">New Password</string>
+    <string name="new_password">Enter your Password</string>
     <string name="register">Register</string>
     <string name="log_in">login</string>
-    <string name="user_name">UserName</string>
+    <string name="user_name">Enter Your Username</string>
+    <string name="update_category">Update_Category</string>
+    <string name="update_category_name">Update Category Name</string>
+    <string name="textview">TextView</string>
+    <string name="add_todo">Add Todo</string>
+    <string name="all_categories">All Categories</string>
+    <string name="add_category">Add Category</string>
+    <string name="caegory_list">Caegory list</string>
+    <string name="update_todo">Update TODO</string>
+    <string name="update">update</string>
+    <string name="todo_lists">Todo Lists</string>
 </resources>

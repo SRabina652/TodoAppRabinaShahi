@@ -2,14 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp">
+    android:padding="10dp">
 
-    <TextView
-        android:id="@+id/category_item_layout_txt_category"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:minHeight="70dp"
-        android:textAlignment="center"
-        android:textSize="34sp" />
+        android:layout_height="match_parent"
+        android:elevation="4dp"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/category_item_layout_txt_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/caegory_list"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+    </androidx.cardview.widget.CardView>
+
 </LinearLayout>

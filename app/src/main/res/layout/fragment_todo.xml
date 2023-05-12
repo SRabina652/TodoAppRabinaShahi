@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
+    android:layout_margin="10dp"
     android:layout_height="match_parent"
     android:contentDescription="@string/todo_title"
     tools:context=".TodoFragment">
@@ -17,16 +18,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <LinearLayout
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/todo_title" />
+                android:text="@string/add_todo"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:textSize="25sp"
+                android:fontFamily="@font/aclonica"
+                />
 
             <EditText
                 android:id="@+id/fragment_todo_txt_title"
@@ -34,14 +42,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/todo_title"
-                android:inputType="textPersonName"
-                android:minHeight="60dp" />
+                android:inputType="textPersonName" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/todo_description" />
 
             <EditText
                 android:id="@+id/fragment_todo_txtDescription"
@@ -50,11 +52,12 @@
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="@string/todo_description"
-                android:inputType="textMultiLine"
-                android:minLines="2" />
+                android:inputType="textMultiLine" />
 
             <TextView
                 android:id="@+id/textView3"
+                android:textSize="15sp"
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/todo_category" />
@@ -66,11 +69,6 @@
                 android:contentDescription="@string/todo_category"
                 android:minHeight="48dp" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/todo_date" />
 
             <EditText
                 android:id="@+id/fragment_todo_txt_date"
@@ -85,6 +83,9 @@
 
             <TextView
                 android:id="@+id/textView5"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/todo_priority" />
@@ -100,7 +101,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/todo_high"
                     android:text="@string/todo_high" />
 
                 <RadioButton
@@ -109,7 +109,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:background="@color/todo_mid"
                     android:text="@string/todo_medium" />
 
                 <RadioButton
@@ -117,7 +116,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/todo_low"
                     android:text="@string/todo_low" />
             </RadioGroup>
 
@@ -126,12 +124,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/todo_complete"
+                android:visibility="gone"
                 android:text="@string/todo_complete" />
 
             <Button
                 android:id="@+id/fragment_todo_btn_Save"
                 android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/purple"
                 android:text="@string/save_todo" />
         </LinearLayout>
     </ScrollView>

@@ -4,16 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="30dp"
     android:padding="10dp"
     tools:context=".CategoryFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/aclonica"
+        android:text="@string/update_category"
+        android:layout_gravity="center"
+        />
     <EditText
         android:id="@+id/fragment_category_txt_category_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:ems="10"
-        android:hint="Update Category Name"
+        android:layout_marginTop="50dp"
+        android:hint="@string/update_category_name"
         android:inputType="textPersonName"
         android:minHeight="48dp" />
 
@@ -23,5 +35,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_weight="0"
-        android:text="Update_Category" />
+        android:text="@string/update_category" />
 </LinearLayout>

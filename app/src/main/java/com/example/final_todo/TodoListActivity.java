@@ -127,7 +127,7 @@ public class TodoListActivity extends AppCompatActivity {
         todoRecyclerView.setVisibility(View.GONE);
         Fragment frag = new TodoFragment();
         FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
-        transition.replace(R.id.activity_main_fragment_container, frag).commit();
+        transition.replace(R.id.fragmentContainer, frag).commit();
     }
     @Override
     public boolean onCreatePanelMenu(int featureId, @NonNull Menu menu) {
