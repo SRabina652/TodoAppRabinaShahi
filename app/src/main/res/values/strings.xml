@@ -1,0 +1,38 @@
+<resources>
+
+
+    <string name="app_name">TodoActivityRabinaShahi</string>
+    <string name="topic">TASKS</string>
+    <string name="savebtn">save</string>
+    <string name="note">WrapUp</string>
+    <string name="quote">\"It always seems impossible until it\’s done.\"\n -Nelson Mandela</string>
+    <string name="tasks">TASKS</string>
+    <string name="value">floating</string>
+    <string name="save">Save</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose_date">Choose Date</string>
+    <string name="pick_date">Pick Date</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="category_name">Category Name</string>
+    <string name="todo_title">Title</string>
+    <string name="todo_description">Description</string>
+    <string name="todo_date">Date</string>
+    <string name="todo_priority">Priority</string>
+    <string name="todo_high">High</string>
+    <string name="todo_medium">Medium</string>
+    <string name="todo_low">Low</string>
+    <string name="todo_category">Category</string>
+    <string name="save_todo">Save</string>
+    <string name="todo_complete">Completed</string>
+
+
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm New Password</string>
+    <string name="new_password">New Password</string>
+    <string name="register">Register</string>
+    <string name="log_in">login</string>
+    <string name="user_name">UserName</string>
+</resources>
