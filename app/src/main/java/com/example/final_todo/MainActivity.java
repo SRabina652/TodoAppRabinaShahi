@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
+        Toast.makeText(this, "Main Activity", Toast.LENGTH_SHORT).show();
         categoryViewModel  = new ViewModelProvider(this).get(CategoryViewModel.class);
 
     }
@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.main_menu_clear_category:
                 categoryViewModel.deleteAllCategory();
                 replaceFragmentCategory();
-
                 return true;
             case R.id.main_menu_logout:
                 SharedPreferences sharedPreferences =  getSharedPreferences("login", MODE_PRIVATE);
@@ -79,5 +78,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+
+        finish();
+
+    }
 
 }

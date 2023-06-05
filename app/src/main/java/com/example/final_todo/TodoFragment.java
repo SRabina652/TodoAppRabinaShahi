@@ -138,15 +138,14 @@ public class TodoFragment extends Fragment {
             Toast.makeText(getActivity(), "Todo Saved", Toast.LENGTH_SHORT).show();
 
             Fragment frag = new CategoryListFragment();
-            FragmentTransaction transition = getActivity().getSupportFragmentManager().beginTransaction();
-            transition.replace(R.id.fragmentContainer, frag).commit();
+//            FragmentTransaction transition = getActivity().getSupportFragmentManager().beginTransaction();
+//            transition.replace(R.id.fragmentContainer, frag).commit();
+            Intent intent= new Intent(getContext(),MainActivity.class);
+            startActivity(intent);
+
         }else {
             Toast.makeText(getActivity(), "Please insert all value", Toast.LENGTH_SHORT).show();
 
         }
-
-
-
-
     }
 }
