@@ -31,20 +31,22 @@ public class CategoryListFragment extends Fragment implements CategoryAdaptor.On
     Category category;
     Context context;
     CategoryAdaptor categoryAdaptor;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Toast.makeText(getActivity().getApplicationContext(), "Category list Fragment Class", Toast.LENGTH_SHORT).show();
 
-        category= new Category();
+        category = new Category();
         View view = inflater.inflate(R.layout.fragment_category_list, container, false);
-        categoryViewModel  = new ViewModelProvider(getActivity()).get(CategoryViewModel.class);
+        categoryViewModel = new ViewModelProvider(getActivity()).get(CategoryViewModel.class);
         categoryAdaptor = new CategoryAdaptor(this::onItemClick);
         categoryViewModel.getCategoryList().observe(getActivity(), new Observer<List<Category>>() {
             @Override
             public void onChanged(List<Category> categories) {
                 categoryAdaptor.setCategoryList(categories);
+                categoryAdaptor.notifyDataSetChanged();
             }
         });
 
@@ -52,7 +54,7 @@ public class CategoryListFragment extends Fragment implements CategoryAdaptor.On
             @Override
             public void run() {
                 categoryRecyclerView = view.findViewById(R.id.category_recycler_view);
-                categoryRecyclerView.setLayoutManager( new LinearLayoutManager(getActivity()));
+                categoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 categoryRecyclerView.setAdapter(categoryAdaptor);
 
                 new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -64,27 +66,25 @@ public class CategoryListFragment extends Fragment implements CategoryAdaptor.On
                     @Override
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                         if (direction == ItemTouchHelper.LEFT) {
-                            CategoryListFragment list= new CategoryListFragment();
+                            CategoryListFragment list = new CategoryListFragment();
                             categoryViewModel.deleteCategory(categoryAdaptor.getCategoryNote(viewHolder.getAdapterPosition()));
                             categoryRecyclerView.getRecycledViewPool().clear();
-                            categoryAdaptor.notifyItemRemoved(viewHolder.getAdapterPosition());
-                            categoryAdaptor.notifyDataSetChanged();
-                            getParentFragmentManager().beginTransaction().replace(R.id.activity_main_fragment_container,list).addToBackStack(null).commit();
+                            categoryAdaptor.notifyItemRemoved(categoryAdaptor.getUpdateCategory(viewHolder.getAdapterPosition()));
                             Toast.makeText(getActivity().getApplicationContext(), "CATEGORY DELETED", Toast.LENGTH_SHORT).show();
                         } else if (direction == ItemTouchHelper.RIGHT) {
-                            int position=viewHolder.getAdapterPosition();
-                            UpdateCategoryFragment updateCategoryFragment=new UpdateCategoryFragment();
-                            Bundle bundle= new Bundle();
-                            bundle.putInt("id",categoryAdaptor.getCategoryPosition(position).getCategoryId());
-                            bundle.putString("name",categoryAdaptor.getCategoryPosition(position).getCategory());
+                            int position = viewHolder.getAdapterPosition();
+                            UpdateCategoryFragment updateCategoryFragment = new UpdateCategoryFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("id", categoryAdaptor.getCategoryPosition(position).getCategoryId());
+                            bundle.putString("name", categoryAdaptor.getCategoryPosition(position).getCategory());
                             updateCategoryFragment.setArguments(bundle);
-                            getParentFragmentManager().beginTransaction().replace(R.id.activity_main_fragment_container,updateCategoryFragment).addToBackStack(null).commit();
+                            getParentFragmentManager().beginTransaction().replace(R.id.activity_main_fragment_container, updateCategoryFragment).addToBackStack(null).commit();
                         }
 
                     }
                 }).attachToRecyclerView(categoryRecyclerView);
             }
-        },1000);
+        }, 100);
         return view;
     }
 

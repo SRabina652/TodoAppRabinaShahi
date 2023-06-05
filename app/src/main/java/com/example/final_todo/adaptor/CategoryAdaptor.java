@@ -67,6 +67,10 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.Catego
         return categoryList.get(position);
     }
 
+    public int getUpdateCategory(int position){
+
+        return categoryList.get(position).getCategoryId();
+    }
     public int getUpdateCategoryNote(int position){
 
         return categoryList.get(position).getCategoryId();

@@ -82,6 +82,7 @@ public class TodoListActivity extends AppCompatActivity {
             public void onChanged(List<Todo> todos) {
 
                 todoAdaptor.setTodoList(todos,context);
+                todoAdaptor.notifyDataSetChanged();
             }
         });
 
@@ -113,9 +114,8 @@ public class TodoListActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 todoViewModel.removeTodo(todoAdaptor.getNote(viewHolder.getAdapterPosition()));
+                todoAdaptor.notifyItemRemoved(todoAdaptor.getUpdateNote(viewHolder.getAdapterPosition()));
                 todoRecyclerView.getRecycledViewPool().clear();
-                todoAdaptor.notifyDataSetChanged();
-
                 Toast.makeText(TodoListActivity.this, "TODO DELETED", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(todoRecyclerView);
