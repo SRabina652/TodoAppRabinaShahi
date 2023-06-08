@@ -106,26 +106,19 @@ public class UpdateTodo extends AppCompatActivity {
         String UpdateDesc= fragment_todo_txtDescription.getText().toString();
 
         boolean isComplete = fragment_todo_chk_complete.isChecked();
-        if(UpdateDesc.isEmpty() || UpdateTitle.isEmpty() || fragment_todo_txt_date.getText().toString().trim().isEmpty()){
+        if(UpdateDesc.isEmpty() || UpdateTitle.isEmpty() || fragment_todo_txt_date.getText().toString().trim().equals("Pick Date")){
             Toast.makeText(UpdateTodo.this, "Please Insert Details", Toast.LENGTH_SHORT).show();
         } else if (UpdateDesc.isEmpty()) {
             Toast.makeText(UpdateTodo.this, "Please Insert Description", Toast.LENGTH_SHORT).show();
         } else if (UpdateTitle.isEmpty()) {
             Toast.makeText(UpdateTodo.this, "Please Insert Title", Toast.LENGTH_SHORT).show();
-        }else if (fragment_todo_txt_date.getText().toString().trim().isEmpty()) {
+        }else if (fragment_todo_txt_date.getText().toString().trim().equals("Pick Date")) {
             Toast.makeText(UpdateTodo.this, "Please Insert date", Toast.LENGTH_SHORT).show();
         }
         else{
             todoViewModel.ChangeTodo(intent.getIntExtra("id", 1), UpdateTitle,UpdateDesc , todoDateOn, isComplete,UpdateOn);
             Toast.makeText(UpdateTodo.this, "Updated", Toast.LENGTH_SHORT).show();
             scrollView.setVisibility(View.GONE);
-
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            fragmentManager.beginTransaction()
-//                    .replace(R.id.updateActivity, CategoryListFragment.class, null)
-//                    .addToBackStack("CategoryList")
-//                    .setReorderingAllowed(true)
-//                    .commit();
 
             Intent intent1= new Intent(getApplicationContext(),MainActivity.class);
             startActivity(intent1);

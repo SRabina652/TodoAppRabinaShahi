@@ -37,15 +37,14 @@ public class TodoFragment extends Fragment {
     Spinner categoryDropDownList;
     EditText txtTodoDate, txtTitle, txtDescription;
     RadioGroup rgPriority;
-    CheckBox chkComlete;
+    CheckBox chkComplete;
     Button btnSave;
     CategoryViewModel categoryViewModel;
-
     TodoViewModel todoViewModel;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         Toast.makeText(getActivity().getApplicationContext(), "Todo Fragment Class", Toast.LENGTH_SHORT).show();
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_todo, container, false);
@@ -56,7 +55,7 @@ public class TodoFragment extends Fragment {
         txtTitle = view.findViewById(R.id.fragment_todo_txt_title);
         txtDescription = view.findViewById(R.id.fragment_todo_txtDescription);
         rgPriority = view.findViewById(R.id.fragment_todo_rg_priority);
-        chkComlete = view.findViewById(R.id.fragment_todo_chk_complete);
+        chkComplete = view.findViewById(R.id.fragment_todo_chk_complete);
         btnSave = view.findViewById(R.id.fragment_todo_btn_Save);
 
         categoryViewModel.getCategoryList().observe(getViewLifecycleOwner(), categories -> {
@@ -66,7 +65,7 @@ public class TodoFragment extends Fragment {
         txtTodoDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               showDateDialog();
+                showDateDialog();
             }
         });
 
@@ -77,10 +76,11 @@ public class TodoFragment extends Fragment {
             }
         });
 
-        return  view;
+        return view;
     }
+
     private void setCategorySpinner(List<Category> categories) {
-        ArrayAdapter<Category> adapter = new ArrayAdapter<Category>(getActivity(),
+        ArrayAdapter<Category> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item, categories) ;
         categoryDropDownList.setAdapter(adapter);
     }
@@ -89,30 +89,30 @@ public class TodoFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_WEEK);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                txtTodoDate.setText(dayOfMonth + "/"+ (month+1)+"/" +year);
+                String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+                txtTodoDate.setText(selectedDate);
             }
-        }, year, month, day
-        );
+        }, year, month, day);
         datePickerDialog.show();
     }
 
 
-    private void saveData(){
+    private void saveData() {
         String title = txtTitle.getText().toString();
-        String descripton = txtDescription.getText().toString();
+        String description = txtDescription.getText().toString();
         String todoDate = txtTodoDate.getText().toString();
         Category category = (Category) categoryDropDownList.getSelectedItem();
         int checkedRadio = rgPriority.getCheckedRadioButtonId();
-        int priority =0;
-        switch (checkedRadio){
+        int priority = 0;
+        switch (checkedRadio) {
             case R.id.fragment_todo_rb_high:
-                priority =0;
+                priority = 0;
                 break;
             case R.id.fragment_todo_rb_mid:
                 priority = 1;
@@ -121,31 +121,39 @@ public class TodoFragment extends Fragment {
                 priority = 2;
                 break;
         }
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date todoDateOn = null;
-        try {
-            todoDateOn = formatter.parse(todoDate);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        Date createdOn = new Date();
-        boolean isComplete = chkComlete.isChecked();
 
-        if((!title.isEmpty()) && (!descripton.isEmpty()) && todoDateOn!=null){
-            Todo todo = new Todo(title, descripton, todoDateOn, isComplete, priority, category.getCategoryId(), createdOn);
+        if (!title.isEmpty() && !description.isEmpty()) {
+            if (!todoDate.equals("Pick Date")) {
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                Date todoDateOn = new Date();
+                try {
+                    todoDateOn = formatter.parse(todoDate);
+                } catch (ParseException e) {
+                    Toast.makeText(getContext(), "Issue with date", Toast.LENGTH_SHORT).show();
+                }
+                Date createdOn = new Date();
+                boolean isComplete = chkComplete.isChecked();
 
-            todoViewModel.saveTodo(todo);
-            Toast.makeText(getActivity(), "Todo Saved", Toast.LENGTH_SHORT).show();
+                Todo todo = new Todo(
+                        title,
+                        description,
+                        todoDateOn,
+                        isComplete,
+                        priority,
+                        category.getCategoryId(),
+                        createdOn
+                );
 
-            Fragment frag = new CategoryListFragment();
-//            FragmentTransaction transition = getActivity().getSupportFragmentManager().beginTransaction();
-//            transition.replace(R.id.fragmentContainer, frag).commit();
-            Intent intent= new Intent(getContext(),MainActivity.class);
-            startActivity(intent);
+                todoViewModel.saveTodo(todo);
+                Toast.makeText(getActivity(), "Todo Saved", Toast.LENGTH_SHORT).show();
 
-        }else {
-            Toast.makeText(getActivity(), "Please insert all value", Toast.LENGTH_SHORT).show();
-
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(getActivity(), "Please select a date", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getActivity(), "Please insert all values", Toast.LENGTH_SHORT).show();
         }
     }
 }
